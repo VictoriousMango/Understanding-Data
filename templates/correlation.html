@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="../codeAsset/css/correlation.css">
+<h1>Correlation Matrix</h1>
+<table class="table table-striped">
+    <tr>
+        <th> </th>
+        {% for header in headings %}
+            <th> {{ header }}</th>
+        {% endfor %}
+    </tr>
+    {% for row in table_data %}
+        <tr>
+            <th>{{ headings[loop.index-1] }}</th>
+            {% for cell in row %}
+                <td>{{ row[cell] }}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table>
+{{ corr_matrix }}
+
+{% endblock content %}

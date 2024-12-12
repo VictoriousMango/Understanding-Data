@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1>Available Column Names</h1>
+<table class="table table-striped">
+    <tr>
+        <th>#</th>
+        <th>Feature Name</th>
+        <th>VIF Values</th>
+    </tr>
+    {% for item in vif %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ item[0] }}</td>
+        <td>{{ item[1] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock content %}

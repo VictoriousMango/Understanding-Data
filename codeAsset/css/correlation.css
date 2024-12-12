@@ -1,0 +1,6 @@
+table {
+    overflow-x: scroll;
+    width: 600px;
+    color:red;
+    border: 20px solid;
+}

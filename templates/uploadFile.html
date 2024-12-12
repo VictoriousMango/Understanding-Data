@@ -1,0 +1,8 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<form action="FileSave" method="POST" enctype="multipart/form-data">
+    <input type="file" class="form-control" name="file" id="file">
+    <button type="submit" class="btn btn-primary mt-3">Upload</button>
+</form>
+{% endblock content %}
