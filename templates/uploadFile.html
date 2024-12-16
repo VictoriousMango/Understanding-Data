@@ -1,8 +1,12 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<form action="FileSave" method="POST" enctype="multipart/form-data">
-    <input type="file" class="form-control" name="file" id="file">
-    <button type="submit" class="btn btn-primary mt-3">Upload</button>
-</form>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/uploadFIle.css') }}">
+
+<div class="uploadFile">
+    <form action="FileSave" method="POST" enctype="multipart/form-data">
+        <input type="file" class="form-control" name="file" id="file">
+        <button type="submit" class="btn btn-primary mt-3">Upload</button>
+    </form>
+</div>
 {% endblock content %}

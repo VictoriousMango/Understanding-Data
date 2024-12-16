@@ -1,0 +1,17 @@
+body{
+    background-image:url("../images/uploadFile.png");
+}
+.uploadFile {
+    margin: 10%;
+    padding: 10%;
+    border: 2px solid yellowgreen;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

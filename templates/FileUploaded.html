@@ -1,10 +1,104 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<h1>File Uploaded</h1>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/FileUploaded.css') }}">
+<h1 style="text-align: center;  backdrop-filter:blur(50px); color: white;">File Uploaded</h1>
 <a href="./RemoveFile">
-    <button type="button" class="btn btn-outline-danger">
+    <button type="button" class="btn btn-outline-danger" style="width: 100%; margin-bottom: 25px;">
         Delete Uploaded File
     </button>
 </a>
+<div class="showData">
+    <div class="showData__head">
+        <h1>Table Head</h1>
+        <div class="showData__table">
+            <table class="table table-striped table-dark table-hover table-bordered">
+                <tr>
+                    {% for header in headings %}
+                    <th> {{ header }}</th>
+                    {% endfor %}
+                </tr>
+                {% for row in table_data_head %}
+                <tr>
+                    {% for cell in row %}
+                    <td>{{ row[cell] }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="showData__tail">
+        <h1>Table Tail</h1>
+        <div class="showData__table">
+            <table class="table table-striped table-dark table-hover table-bordered">
+                <tr>
+                    {% for header in headings %}
+                    <th> {{ header }}</th>
+                    {% endfor %}
+                </tr>
+                {% for row in table_data_tail %}
+                <tr>
+                    {% for cell in row %}
+                    <td>{{ row[cell] }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="showData__describe">
+        <h1>Table Description</h1>
+        <div class="showData__table">
+            <table class="table table-striped table-dark table-hover table-bordered">
+                <tr>
+                    <th></th>
+                    {% for header in headings %}
+                    <th> {{ header }}</th>
+                    {% endfor %}
+                </tr>
+                {% for row in table_data_describe %}
+                <tr>
+                    <td>{{describe_columns[loop.index]}}</td>
+                    {% for cell in row %}
+                    <td>{{ row[cell] }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    <div class="showData__summary">
+        <h1>Table Summary</h1>
+        <h2 style="text-align: left;">Rows having null data</h2>
+        <div class="showData__table">
+            <table class="table table-striped table-dark table-hover table-bordered">
+                <tr>
+                    {% for header in headings %}
+                    <th> {{ header }}</th>
+                    {% endfor %}
+                </tr>
+                {% for row in table_data_summary %}
+                <tr>
+                    {% for cell in row %}
+                    <td>{{ row[cell] }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="showData__summary__nonNumericData" style="text-align: left;">
+            <h2>Non-Numeric Data</h2>
+            <ol>
+                {% for columnInfo in table_data_summary_nonNumeric %}
+                <li style="padding: 1%;">{{ columnInfo }}</li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+</div>
+<div class="pairPlot" style="width: 100%; overflow-y: scroll;">
+    <img src="./static/images/pairPlot.png" alt="">
+</div>
+
 {% endblock content %}

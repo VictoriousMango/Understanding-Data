@@ -1,0 +1,51 @@
+body{
+    background-image:url("../images/uploadFile.png");
+}
+
+.showData__head {
+    border: 1px solid;
+    grid-area: "head";
+    text-align: center;
+    width: 100%;
+    overflow-x: scroll;
+    background-color: #f2f2f2;
+}
+.showData__tail {
+    border: 1px solid;
+    grid-area:"tail";
+    text-align: center;
+    width: 100%;
+    overflow-x: scroll;
+    background-color: #f2f2f2;
+}
+.showData__describe {
+    border: 1px solid;
+    grid-area:"describe";
+    text-align: center;
+    width: 100%;
+    overflow-x: scroll;
+    background-color: #f2f2f2;
+}
+.showData__summary {
+    border: 1px solid;
+    grid-area:"summary";
+    text-align: center;
+    width: 100%;
+    overflow-x: scroll;
+    background-color: #f2f2f2;
+}
+.showData {
+    
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas: 
+        "head tail"
+        "describe summary";
+    column-gap: 15px;
+    row-gap: 15px;
+}
+.showData__table {
+    width: 100%;
+    overflow-x: scroll;
+}

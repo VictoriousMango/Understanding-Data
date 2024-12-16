@@ -1,12 +1,13 @@
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 import pandas as pd
 
-def multicolinearity():
+def multicolinearity(columns):
     df = pd.read_csv("./Data/Data.csv")
 
     # VIF dataframe
     vif_data = pd.DataFrame()
-    df = df.drop(["Flood", "Id"], axis=1)
+    if columns:
+        df = df.drop(columns, axis=1)
     vif_data["feature"] = df.columns
 
     # calculating VIF for each feature

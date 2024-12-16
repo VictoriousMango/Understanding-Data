@@ -7,7 +7,7 @@ import seaborn as sns
 import numpy as np
 from codeAsset.correlation import correlation as corr
 from codeAsset.multicolinearity import multicolinearity as Mcol
-from codeAsset.MapWeightGeneration import create_weighted_tif
+import seaborn as sns
 
 app = Flask(__name__)
 
@@ -54,7 +54,31 @@ def weightGeneration():
 def hello_world():
     try:
         df = pd.read_csv("Data/Data.csv")
-        return render_template("FileUploaded.html")
+        nonNumeric = list()        
+        try:
+            with open("./static/images/pairPlot.png", 'rb') as f:
+                f.read()    
+        except:
+            sns.pairplot(df) 
+            plt.savefig('./static/images/pairPlot.png')
+        for i in df.columns:
+            try:
+                pd.to_numeric(df[i])
+                nonNumeric.append(f"No Non Numeric Values in {i} column")
+            except ValueError:
+                nonNumeric.append(f"Non Numeric Values in {i} column")
+            except Exception as e:
+                print(f"Exception : {e}")
+                return redirect(f"/Except/{e}")
+        return render_template(
+            "FileUploaded.html", 
+            headings=df.columns, 
+            table_data_head=df.head().to_dict(orient="records"),
+            table_data_tail=df.tail().to_dict(orient="records"),
+            table_data_describe=df.describe().to_dict(orient="records"),
+            table_data_summary=df[df.isnull().any(axis=1)].to_dict(orient="records"),
+            table_data_summary_nonNumeric = nonNumeric,
+            describe_columns = ["count" , "mean", "std", "min", "25%", "50%", "75%", "max"]            )
     except FileNotFoundError:
         return render_template("uploadFile.html")
 
@@ -67,11 +91,18 @@ def correlations():
         print(f"Exception : {e}")
         return redirect(f"/Except/{e}")
 
-@app.route("/MultiColinearity")
+@app.route("/MultiColinearity", methods=["POST", "GET"])
 def multicolinearity():
     try:
-        vif = Mcol()
-        return render_template("./multicolinearity.html", vif=vif)
+        featuresName = ""
+        if request.method == 'POST' and request.form.get("features") != "":
+            featuresName = [i.strip() for i in request.form.get("features").split(",")]
+        vif = Mcol(featuresName)
+        return render_template(
+            "./multicolinearity.html", 
+            vif=vif, 
+            featuresName=", ".join(featuresName) if request.form.get("features") != "" else ""
+            )
     except Exception as e:
         print(f"Exception : {e}")
         return redirect(f"/Except/{e}")
