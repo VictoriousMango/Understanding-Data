@@ -3,11 +3,23 @@
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/FileUploaded.css') }}">
 <h1 style="text-align: center;  backdrop-filter:blur(50px); color: white;">File Uploaded</h1>
-<a href="./RemoveFile">
-    <button type="button" class="btn btn-outline-danger" style="width: 100%; margin-bottom: 25px;">
-        Delete Uploaded File
-    </button>
-</a>
+<div class="row">
+    <div class="col">
+        <a href="./RemoveFile">
+            <button type="button" class="btn btn-outline-danger" style="width: 100%; margin-bottom: 25px;">
+                Delete Uploaded File
+            </button>
+        </a>
+    </div>
+    <div class="col">
+        <a href="./Normalize">
+            <button type="button" class="btn btn-outline-info" style="width: 100%; margin-bottom: 25px;">
+                Normalize the Data
+            </button>
+        </a>
+    </div>
+</div>
+
 <div class="showData">
     <div class="showData__head">
         <h1>Table Head</h1>

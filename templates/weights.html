@@ -1,6 +1,72 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+<link rel="stylesheet" href="../static/css/weights.css">
+
+<div class="row weights__MLAlgo">
+    <div class="col">
+        <div class="card" id="cardRFC">
+            <h5 class="card-header">Random Forest Classifier</h5>
+            <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            </div>
+            <div class="card-footer">
+                <button onclick="updateForm('RFC_weightGeneration', 'Random Forest Classifier', 'cardRFC')" class="btn btn-primary">Select Model</button>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card" id="cardDT">
+            <h5 class="card-header">Decision Tree Regressor</h5>
+            <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            </div>
+            <div class="card-footer">
+                <button onclick="updateForm('DT_weightGeneration', 'Decision Tree Regressor', 'cardDT')" class="btn btn-primary">Select Model</button>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card" id="cardLR">
+            <h5 class="card-header">Linear Regression</h5>
+            <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            </div>
+            <div class="card-footer">
+                <button onclick="updateForm('LR_weightGeneration', 'Linear Regression', 'cardLR')" class="btn btn-primary">Select Model</button>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card" id="cardMR">
+            <h5 class="card-header">Multiple Regression</h5>
+            <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            </div>
+            <div class="card-footer">
+                <button onclick="updateForm('MR_weightGeneration', 'Multiple Regression', 'cardMR')" class="btn btn-primary">Select Model</button>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card" id="cardLogR">
+            <h5 class="card-header">Logistic Regression</h5>
+            <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            </div>
+            <div class="card-footer">
+                <button onclick="updateForm('LogisticR_weightGeneration', 'Logistic Regression', 'cardLogR')" class="btn btn-primary">Select Model</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
 <h1>Available Column Names</h1>
 <table class="table table-striped">
     <tr>
@@ -17,7 +83,8 @@
     {% endfor %}
 </table>
 
-<form action="./weightGeneration" method="POST">
+<!-- Form Section -->
+<form id="modelForm" action="./RFC_weightGeneration" method="POST">
     <div class="mb-3 row">
         <label for="features" class="col-sm-2 col-form-label">Model Features</label>
         <div class="col-sm-10">
@@ -30,7 +97,29 @@
             <input type="text" class="form-control" id="targetVariable" name="targetVariable" value="{{targetVar}}">
         </div>
     </div>
-    <button type="submit" class="btn btn-primary mt-3">Generate Weights</button>
+    <button type="submit" id="submitButton" class="btn btn-primary mt-3">Generate Weights</button>
 </form>
+
+<img src="./static/images/ModelEvaluation.png" alt="">
+
+<!-- JavaScript Section -->
+<script>
+function updateForm(actionUrl, buttonText, cardId) {
+    // Update the form action attribute
+    document.getElementById('modelForm').action = './' + actionUrl;
+    
+    // Update the button text
+    document.getElementById('submitButton').innerText = "Generate Weights for " + buttonText;
+
+    // Remove 'selected' class from all cards
+    let cards = document.querySelectorAll('.card');
+    cards.forEach(function(card) {
+        card.classList.remove('selected');
+    });
+
+    // Add 'selected' class to the clicked card
+    document.getElementById(cardId).classList.add('selected');
+}
+</script>
 
 {% endblock content %}

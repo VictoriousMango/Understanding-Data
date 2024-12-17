@@ -7,7 +7,10 @@ import seaborn as sns
 import numpy as np
 from codeAsset.correlation import correlation as corr
 from codeAsset.multicolinearity import multicolinearity as Mcol
+from codeAsset.RandomForestClassifier import randomForest as rf
+from codeAsset.DecisionTree import decisionTree as dt
 import seaborn as sns
+from sklearn.preprocessing import MinMaxScaler
 
 app = Flask(__name__)
 
@@ -23,31 +26,86 @@ def FileSave():
 @app.route("/RemoveFile")
 def RemoveFile():
     os.remove("./Data/Data.csv")
+    os.remove("./Data/CorrelationData.csv")
+    os.remove("./static/images/correlation_plot.png")
+    os.remove("./static/images/pairPlot.png")
     return redirect("/")
 
-@app.route("/weightGeneration", methods=["GET","POST"])
-def weightGeneration():
+@app.route("/RFC_weightGeneration", methods=["GET","POST"])
+def weightGeneration_RFC():
     if request.method == 'POST':
         try:
-            df = pd.read_csv("./Data/Data.csv")
-            # print("This is what I am looking for" + request)
             featuresName = [i.strip() for i in request.form.get("features").split(",")]
             targetVar = request.form.get("targetVariable").strip()
-            columnNames = [[columnName, 0] for columnName in df.columns if columnName in featuresName]
-            X = df[featuresName]
-            y = df[targetVar]
-
-            # Model
-            model = RandomForestRegressor(max_depth=2, random_state=0)
-            # Model Fit
-            model.fit(X, y)
-            for i in range(len(model.feature_importances_)):
-                columnNames[i][1] += model.feature_importances_[i]
+            (columnNames, featuresName, targetVar) = rf(featuresName, targetVar, test_size=0.2)
             return render_template("./weights.html", columnNames=columnNames, featuresName=", ".join(featuresName), targetVar=targetVar)
         except Exception as e:
             print(f"Exception : {e}")
             return redirect(f"/Except/{e}")
     return redirect(f"/Except/{request.method}")
+
+@app.route("/DT_weightGeneration", methods=["GET","POST"])
+def weightGeneration_DT():
+    if request.method == 'POST':
+        try:
+            featuresName = [i.strip() for i in request.form.get("features").split(",")]
+            targetVar = request.form.get("targetVariable").strip()
+            (columnNames, featuresName, targetVar) = dt(featuresName, targetVar, test_size=0.2)
+            return render_template("./weights.html", columnNames=columnNames, featuresName=", ".join(featuresName), targetVar=targetVar)
+        except Exception as e:
+            print(f"Exception : {e}")
+            return redirect(f"/Except/{e}")
+    return redirect(f"/Except/{request.method}")
+
+@app.route("/LR_weightGeneration", methods=["GET","POST"])
+def weightGeneration_LR():
+    if request.method == 'POST':
+        try:
+            featuresName = [i.strip() for i in request.form.get("features").split(",")]
+            targetVar = request.form.get("targetVariable").strip()
+            (columnNames, featuresName, targetVar) = rf(featuresName, targetVar, test_size=0.2)
+            return render_template("./weights.html", columnNames=columnNames, featuresName=", ".join(featuresName), targetVar=targetVar)
+        except Exception as e:
+            print(f"Exception : {e}")
+            return redirect(f"/Except/{e}")
+    return redirect(f"/Except/{request.method}")
+
+@app.route("/MR_weightGeneration", methods=["GET","POST"])
+def weightGeneration_MR():
+    if request.method == 'POST':
+        try:
+            featuresName = [i.strip() for i in request.form.get("features").split(",")]
+            targetVar = request.form.get("targetVariable").strip()
+            (columnNames, featuresName, targetVar) = rf(featuresName, targetVar, test_size=0.2)
+            return render_template("./weights.html", columnNames=columnNames, featuresName=", ".join(featuresName), targetVar=targetVar)
+        except Exception as e:
+            print(f"Exception : {e}")
+            return redirect(f"/Except/{e}")
+    return redirect(f"/Except/{request.method}")
+
+@app.route("/LogisticR_weightGeneration", methods=["GET","POST"])
+def weightGeneration_LogisticR():
+    if request.method == 'POST':
+        try:
+            featuresName = [i.strip() for i in request.form.get("features").split(",")]
+            targetVar = request.form.get("targetVariable").strip()
+            (columnNames, featuresName, targetVar) = rf(featuresName, targetVar, test_size=0.2)
+            return render_template("./weights.html", columnNames=columnNames, featuresName=", ".join(featuresName), targetVar=targetVar)
+        except Exception as e:
+            print(f"Exception : {e}")
+            return redirect(f"/Except/{e}")
+    return redirect(f"/Except/{request.method}")
+
+@app.route("/Normalize")
+def normalize():
+    df = pd.read_csv("./Data/Data.csv")
+    scaler = MinMaxScaler()
+    df_normalized = pd.DataFrame(scaler.fit_transform(df), columns=df.columns)
+    df_normalized.to_csv("./Data/Data.csv", index=False)
+    os.remove("./Data/CorrelationData.csv")
+    os.remove("./static/images/correlation_plot.png")
+    os.remove("./static/images/pairPlot.png")
+    return redirect("/")
 
 
 @app.route("/")
@@ -78,7 +136,8 @@ def hello_world():
             table_data_describe=df.describe().to_dict(orient="records"),
             table_data_summary=df[df.isnull().any(axis=1)].to_dict(orient="records"),
             table_data_summary_nonNumeric = nonNumeric,
-            describe_columns = ["count" , "mean", "std", "min", "25%", "50%", "75%", "max"]            )
+            describe_columns = ["count" , "mean", "std", "min", "25%", "50%", "75%", "max"]            
+            )
     except FileNotFoundError:
         return render_template("uploadFile.html")
 
@@ -121,9 +180,6 @@ def weights():
 @app.route("/Except/<EXCEPTION>")
 def expception(EXCEPTION):
     return render_template("./Exception/Exception.html", Exception=EXCEPTION)
-
-INPUT_DIR = "./tif_files"
-OUTPUT_FILE = "./Data/weighted_sum.tif"
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

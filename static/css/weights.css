@@ -1,0 +1,21 @@
+.weights__MLAlgo {
+    height:max-content;
+    flex-wrap: nowrap;
+    align-items: center;
+    overflow-x: scroll;
+    padding: 50px;
+}
+
+.card {
+    transition: transform 0.8s ease, background-color 0.8s ease; /* Smooth transition for transformations */
+    transform-origin: center;
+    width: 300px;
+}
+
+.card.selected {
+    background-color: #f0f8ff; /* Light blue shade for the selected card */
+    transform: scale(1.25) rotateY(360deg); /* Enlarge and rotate */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Add a shadow for emphasis */
+    border: 2px solid #007bff; /* Add a border to highlight */
+    z-index: 10; /* Ensure the selected card is above others */
+}
