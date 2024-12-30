@@ -17,4 +17,4 @@ docker run -p 5000:5000 flask-ngrok-app
 ```
 
 ## Demo Video
-[Watch the video on YouTube]([https://www.youtube.com/watch?v=VIDEO_ID](https://youtu.be/ZG5VPmkSuqM))
+[Watch the video on YouTube](https://youtu.be/ZG5VPmkSuqM)
