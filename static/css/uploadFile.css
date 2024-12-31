@@ -1,5 +1,10 @@
 body{
-    background-image:url("../images/uploadFile.png");
+    background-image:url("../images/bgImg.png");
+}
+h1, label {
+    backdrop-filter: blur(50px);
+    color: azure;
+    text-align: center;
 }
 .uploadFile {
     margin: 10%;

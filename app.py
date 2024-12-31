@@ -25,10 +25,15 @@ def FileSave():
 
 @app.route("/RemoveFile")
 def RemoveFile():
-    os.remove("./Data/Data.csv")
-    os.remove("./Data/CorrelationData.csv")
-    os.remove("./static/images/correlation_plot.png")
-    os.remove("./static/images/pairPlot.png")
+    fileList = [
+        "./Data/Data.csv",
+        "./Data/CorrelationData.csv",
+        "./static/images/correlation_plot.png",
+        "./static/images/pairPlot.png"
+    ]
+    for i in fileList:
+        if os.path.exists(i):
+            os.remove(i)
     return redirect("/")
 
 @app.route("/RFC_weightGeneration", methods=["GET","POST"])
@@ -102,9 +107,14 @@ def normalize():
     scaler = MinMaxScaler()
     df_normalized = pd.DataFrame(scaler.fit_transform(df), columns=df.columns)
     df_normalized.to_csv("./Data/Data.csv", index=False)
-    os.remove("./Data/CorrelationData.csv")
-    os.remove("./static/images/correlation_plot.png")
-    os.remove("./static/images/pairPlot.png")
+    fileList = [
+        "./Data/CorrelationData.csv",
+        "./static/images/correlation_plot.png",
+        "./static/images/pairPlot.png"
+    ]
+    for i in fileList:
+        if os.path.exists(i):
+            os.remove(i)
     return redirect("/")
 
 
