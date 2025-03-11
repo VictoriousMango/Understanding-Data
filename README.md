@@ -6,11 +6,11 @@ Understanding Data is a comprehensive project aimed at showcasing various data a
 > [Watch the video on YouTube](https://youtu.be/ZG5VPmkSuqM)
 
 # Table of Contents
-1. [Installation](./#installation)
-2. Usage
-3. Features
-4. Technology Stack
-5. Skills Demonstrated
+1. [Installation](#installation)
+2. [Usage](#usage)
+3. [Features](#features)
+4. [Technology Stack](#technology-stack)
+5. [Skills Demonstrated](#skills-demonstrated)
 
 ## Installation
 ### 1. Clone the repository:
@@ -25,7 +25,7 @@ cd Understanding-Data
 ```
 pip install -r requirements.txt
 ```
-### 4. Usage
+## Usage
 #### Run the main script to start the data analysis:
 ```
 python main.py
