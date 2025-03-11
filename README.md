@@ -1,66 +1,49 @@
+# Understanding Data
+## Description
+Understanding Data is a comprehensive project aimed at showcasing various data analysis and visualization techniques using Python, HTML, CSS, Dockerfile, and Shell scripting. This project is designed to help users understand data manipulation, analysis, and presentation skills that are valuable for data science and web development roles.
 
-# Understanding-Data
+# Table of Contents
+1. [Installation](./#installation)
+2. Usage
+3. Features
+4. Technology Stack
+5. Skills Demonstrated
 
-An Application, which provides an interface to upload your data set, and analyse the data. It allows exploratory data analysis, corelation graph, and multicollinearity analysis. It even provides few ML models to, on which you can train and test your data sets, and generate sets for further analysis of your uploaded data.
-
-
-## Demo
-
-[Watch the video on YouTube](https://youtu.be/ZG5VPmkSuqM)
-## Run Locally
-
-Clone the project
-
-```bash
-  git clone https://github.com/VictoriousMango/Understanding-Data.git
+## Installation
+### 1. Clone the repository:
 ```
-
-### Virtual Environment Set Up
-#### To create Virtual Environment
-
-```bash
-  python -m venv venv
+git clone https://github.com/VictoriousMango/Understanding-Data.git
 ```
-
-#### To activate virtual environment
-
-```bash
-  venv\Scripts\activate
+### 2. Navigate to the project directory:
 ```
-
-To Run Locally
-
-```bash
-  python app.py
+cd Understanding-Data
 ```
+### 3. Install the required dependencies:
+```
+pip install -r requirements.txt
+```
+### 4. Usage
+#### Run the main script to start the data analysis:
+```
+python main.py
+```
+#### Open the index.html file in your browser to view the visualizations.
 
+## Features
+- Data Cleaning and Preprocessing
+- Data Analysis
+- Data Visualization
+- Docker Containerization
+- Shell Scripting for Automation
+  
+## Technology Stack
+- Python: Used for data manipulation, analysis, and visualization.
+- HTML & CSS: Used for presenting the data visualizations in a web format.
+- Dockerfile: Used for containerizing the application.
+- Shell: Used for automating tasks.
 
-## Tech Stack
-
-**Client:** Bootstrap, HTML, CSS, Jinja Template Engine
-
-**Server:** Python, Flask
-
-
-## Lessons Learned
-
-- Beginner Python Skills
-  - Variables and Data Types
-  - Conditional Statements
-  - Loops
-  - Basic Input and Output
-  - Lists, Tuples, and Dictionaries
-  - Functions
-  - Exception Handling
-  - Importing Libraries
-- Intermediate Python Skills
-  - Modules and Packages
-  - List Comprehensions
-  - Working with APIs
-  - Plotting
-  - Web Frameworks (Flask)
-  - Virtual Environment
-- Advanced Python Skills
-  - CSV File Handling
-  - REST APIs
-  - Data Manipulation and Analysis
+## Skills Demonstrated
+- Python: Proficiency in data manipulation libraries such as Pandas and NumPy, as well as data visualization libraries like Matplotlib and Seaborn.
+- Web Development: Skills in HTML and CSS for creating interactive and responsive data visualization web pages.
+- Containerization: Experience with Docker to containerize applications for consistent environments across development, testing, and production.
+- Automation: Proficiency in Shell scripting for automating repetitive tasks.
